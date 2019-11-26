@@ -1,2 +1,2 @@
 # KostalPlenticore-Python
-Python API Call to Kostal PLENTICORE
+Python API Call to Kostal PLENTICORE not finished !
