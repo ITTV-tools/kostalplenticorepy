@@ -1,2 +1,4 @@
 # KostalPlenticore-Python
-Python API Call to Kostal PLENTICORE not finished !
+Python Libery to request data from Kostal Plenticore Plus
+
+Special thanks to E3EAT
