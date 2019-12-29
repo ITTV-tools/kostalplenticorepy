@@ -117,24 +117,50 @@ class connect:
         url = self.BASE_URL + "/info/version"
         response = requests.get(url = url, headers = self.headers)
         response = json.loads(response.text)
-        #swversion = response['sw_version']
-        #apiversion = response['api_version']
-        #hostname = response['hostname']
-        #name = response['name']
-        #print("Connected to the inverter " + name + "/" + hostname + " with SW-Version " + swversion + " and API-Version " + apiversion)
         return response
 
-# Auth OK, now send your desired requests
+        #Customized request
+    def getProcessdata(self, moduleid, prossdata):
+        url = self.BASE_URL + "/processdata"
+        datareq = [{
+            "moduleid": moduleid,
+            "processdataids": prossdata
+        }]
+        datareq = json.dumps(datareq)
+        response = requests.post(url = url, data=datareq, headers = self.headers)
+        response = json.loads(response.text)
+        return response[0]['processdata']
 
-#url = self.BASE_URL + "/processdata"
-#datareq = [{
-#    "moduleid": "devices:local:battery",
-#    "processdataids": ['SoC']
-#}]
 
-#datareq = json.dumps(datareq)
-#print(datareq)
-#print()
-#response = requests.post(url = url, data=datareq, headers = headers)
-#response = json.loads(response.text)
-#print(response)
+    def getBatteriePercent(self):
+        url = self.BASE_URL + "/processdata"
+        datareq = [{
+            "moduleid": "devices:local:battery",
+            "processdataids": ['SoC']
+        }]
+        datareq = json.dumps(datareq)
+        response = requests.post(url = url, data=datareq, headers = self.headers)
+        response = json.loads(response.text)
+        return response[0]['processdata'][0]['value']
+
+    def getPvPower(self):
+        url = self.BASE_URL + "/processdata"
+        datareq = [{
+            "moduleid": "devices:local",
+            "processdataids": ['Dc_P']
+        }]
+        datareq = json.dumps(datareq)
+        response = requests.post(url = url, data=datareq, headers = self.headers)
+        response = json.loads(response.text)
+        return response[0]['processdata'][0]['value']
+
+    def getHomePowerConsumption(self):
+        url = self.BASE_URL + "/processdata"
+        datareq = [{
+            "moduleid": "devices:local",
+            "processdataids": ['HomeOwn_P']
+        }]
+        datareq = json.dumps(datareq)
+        response = requests.post(url = url, data=datareq, headers = self.headers)
+        response = json.loads(response.text)
+        return response[0]['processdata'][0]['value']
