@@ -132,7 +132,7 @@ class connect:
         return response[0]['processdata']
 
 
-    def getBatteriePercent(self):
+    def getBatteryPercent(self):
         url = self.BASE_URL + "/processdata"
         datareq = [{
             "moduleid": "devices:local:battery",
