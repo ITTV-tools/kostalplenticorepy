@@ -6,9 +6,6 @@ Special thanks to E3EAT
 Usage:
 
 ```python
-import kostalpy
-
-con = kostalpy.connect("192.168.1.23", "Password")
 import kostalplenticore
 
 con = kostalplenticore.connect("192.168.251.22", "Password")
