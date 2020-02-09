@@ -3,6 +3,8 @@ Python library to request data from Kostal Plenticore Plus
 
 Special thanks to E3EAT
 
+
+
 Usage:
 
 ```python
@@ -16,3 +18,5 @@ print(con.getHomePowerConsumption())
 print(con.getProcessdata("devices:local", ["HomeGrid_P"])[0]["value"])
 
 ```
+Install:
+pip install kostalplenticore
