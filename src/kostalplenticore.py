@@ -45,7 +45,7 @@ class connect:
         step1 = json.dumps(step1)
         url = self.BASE_URL + AUTH_START
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
-        response = requests.post(url, data=step1, headers=headers)
+        response = requests.post(url, data=step1, headers=headers, timeout=10)
         response = json.loads(response.text)
 
         i = response['nonce']
@@ -72,7 +72,7 @@ class connect:
 
         url = self.BASE_URL + AUTH_FINISH
         headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
-        response = requests.post(url, data=step2, headers=headers)
+        response = requests.post(url, data=step2, headers=headers, timeout=10)
         response = json.loads(response.text)
 
         token = response['token']
@@ -98,7 +98,7 @@ class connect:
 
         headers = { 'Content-type': 'application/json', 'Accept': 'application/json' }
         url = self.BASE_URL + AUTH_CREATE_SESSION
-        response = requests.post(url, data=step3, headers=headers)
+        response = requests.post(url, data=step3, headers=headers, timeout=10)
         response = json.loads(response.text)
         sessionId = response['sessionId']
 
@@ -115,7 +115,7 @@ class connect:
 
     def getInfo(self):
         url = self.BASE_URL + "/info/version"
-        response = requests.get(url = url, headers = self.headers)
+        response = requests.get(url = url, headers = self.headers, timeout=10)
         response = json.loads(response.text)
         return response
 
@@ -127,7 +127,7 @@ class connect:
             "processdataids": prossdata
         }]
         datareq = json.dumps(datareq)
-        response = requests.post(url = url, data=datareq, headers = self.headers)
+        response = requests.post(url = url, data=datareq, headers = self.headers, timeout=10)
         response = json.loads(response.text)
         return response[0]['processdata']
 
@@ -139,7 +139,7 @@ class connect:
             "processdataids": ['SoC']
         }]
         datareq = json.dumps(datareq)
-        response = requests.post(url = url, data=datareq, headers = self.headers)
+        response = requests.post(url = url, data=datareq, headers = self.headers, timeout=10)
         response = json.loads(response.text)
         return response[0]['processdata'][0]['value']
 
@@ -150,7 +150,7 @@ class connect:
             "processdataids": ['Dc_P']
         }]
         datareq = json.dumps(datareq)
-        response = requests.post(url = url, data=datareq, headers = self.headers)
+        response = requests.post(url = url, data=datareq, headers = self.headers, timeout=10)
         response = json.loads(response.text)
         return response[0]['processdata'][0]['value']
 
@@ -161,6 +161,21 @@ class connect:
             "processdataids": ['HomeOwn_P']
         }]
         datareq = json.dumps(datareq)
-        response = requests.post(url = url, data=datareq, headers = self.headers)
+        response = requests.post(url = url, data=datareq, headers = self.headers, timeout=10)
         response = json.loads(response.text)
         return response[0]['processdata'][0]['value']
+
+    def setBatteryMinSoc(self, value):
+        url = self.BASE_URL + "/settings"
+        datareq = [{"moduleid":"devices:local","settings":[{"id":"Battery:MinSoc","value":str(value)}]}]
+        datareq = json.dumps(datareq)
+        response = requests.put(url = url, data=datareq, headers = self.headers, timeout=10)
+        response = json.loads(response.text)
+        return response
+
+    def setBatteryDynamicSoc(self, value):
+        url = self.BASE_URL + "/settings"
+        datareq = [{"moduleid":"devices:local","settings":[{"id":"Battery:DynamicSoc:Enable","value":str(value)}]}]
+        datareq = json.dumps(datareq)
+        requests.put(url = url, data=datareq, headers = self.headers, timeout=10)
+        return True
