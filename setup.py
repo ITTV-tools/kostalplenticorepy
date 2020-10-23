@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="kostalplenticore",
-    version="0.2",
+    version="0.3",
     author="ittv-tools",
     description="API call to Kostal Plenticore",
     url="https://github.com/ITTV-tools/kostalplenticorepy",

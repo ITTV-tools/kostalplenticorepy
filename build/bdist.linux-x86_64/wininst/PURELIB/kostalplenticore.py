@@ -120,27 +120,17 @@ class connect:
         return response
 
         #Customized request
-    def getProcessdata(self, moduleid, processdata):
+    def getProcessdata(self, moduleid, prossdata):
         url = self.BASE_URL + "/processdata"
         datareq = [{
             "moduleid": moduleid,
-            "processdataids": processdata
+            "processdataids": prossdata
         }]
         datareq = json.dumps(datareq)
         response = requests.post(url = url, data=datareq, headers = self.headers, timeout=10)
         response = json.loads(response.text)
         return response[0]['processdata']
 
-    def getSettings(self, moduleid, settings):
-        url = self.BASE_URL + "/settings"
-        datareq = [{
-            "moduleid": moduleid,
-            "settingids": settings
-        }]
-        datareq = json.dumps(datareq)
-        response = requests.post(url = url, data=datareq, headers = self.headers, timeout=10)
-        response = json.loads(response.text)
-        return response[0]['settings']
 
     def getBatteryPercent(self):
         url = self.BASE_URL + "/processdata"
