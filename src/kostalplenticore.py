@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import sys
@@ -12,7 +11,6 @@ import os
 import hmac
 from Crypto.Cipher import AES
 import binascii
-# pip install pycryptodome
 
 def randomString(stringLength):
     letters = string.ascii_letters
@@ -28,8 +26,6 @@ class connect:
 
     def login(self):
         USER_TYPE = "user"
-        #PASSWD = 'N0Hj9xvZf5'
-        #self.BASE_URL = "http://192.168.1.23/api/v1"
         AUTH_START = "/auth/start"
         AUTH_FINISH = "/auth/finish"
         AUTH_CREATE_SESSION = "/auth/create_session"

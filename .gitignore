@@ -1,0 +1,9 @@
+# PyPI configuration
+.pypirc
+
+# Files from Python build process
+*.pyc
+*.pyo
+build
+dist
+*.egg-info

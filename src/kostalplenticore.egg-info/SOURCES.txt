@@ -1,8 +1,0 @@
-README.md
-setup.py
-src/kostalplenticore.py
-src/kostalplenticore.egg-info/PKG-INFO
-src/kostalplenticore.egg-info/SOURCES.txt
-src/kostalplenticore.egg-info/dependency_links.txt
-src/kostalplenticore.egg-info/requires.txt
-src/kostalplenticore.egg-info/top_level.txt
