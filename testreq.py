@@ -1,6 +1,6 @@
 import kostalplenticore
 
-con = kostalplenticore.connect("192.168.251.22", "N0Hj9xvZf5")
+con = kostalplenticore.connect("192.168.251.22", "<PW>")
 con.login()
 print(con.getBatteryPercent())
 print(con.getPvPower())
