@@ -152,6 +152,7 @@ class connect:
     # See this file for getProcessdata input
     # https://github.com/ITTV-tools/homeassistant-kostalplenticore/blob/master/custom_components/kostal_plenticore/const.py
     ###
+    # Battery
     def getBatteryPercent(self):
         response = self.getProcessdata("devices:local:battery", ['SoC'])
         return response[0]['value']
@@ -160,25 +161,56 @@ class connect:
         response = self.getProcessdata("devices:local:battery", ['Cycles'])
         return response[0]['value']
 
+    # Power (W)
     def getPvPower(self):
-        response = self.getProcessdata("devices:local", ['Dc_P'])
-        return response[0]['value']
+        response1 = self.getProcessdata("devices:local:pv1", ['P'])
+        response2 = self.getProcessdata("devices:local:pv2", ['P'])
+        value = response1[0]['value'] + response2[0]['value'] 
+        return int(value)
 
+    def getGridPower(self):
+        response = self.getProcessdata("devices:local", ['Grid_P'])
+        value = response[0]['value']
+        return int(value)
+
+    def getBatteryPower(self):
+        response = self.getProcessdata("devices:local", ['HomeBat_P'])
+        value = response[0]['value']
+        return int(value)
+
+    def getHomePowerConsumption(self):
+        response = self.getProcessdata("devices:local", ['HomeOwn_P'])
+        value = response[0]['value']
+        return int(value)
+
+    # Energy (kWh)
+    def getHomeConsumptionTotal(self):
+        response = self.getProcessdata("scb:statistic:EnergyFlow", ['Statistic:EnergyHome:Total'])
+        value = response[0]['value'] / 1000 # Wh -> kWh
+        return int(value)
+
+    def getHomeConsumptionFromGridTotal(self):
+        response = self.getProcessdata("scb:statistic:EnergyFlow", ['Statistic:EnergyHomeGrid:Total'])
+        value = response[0]['value'] / 1000 # Wh -> kWh
+        return int(value)
+
+    def getHomeConsumptionFromPVTotal(self):
+        response = self.getProcessdata("scb:statistic:EnergyFlow", ['Statistic:EnergyHomePv:Total'])
+        value = response[0]['value'] / 1000 # Wh -> kWh
+        return int(value)
+
+    def getHomeConsumptionFromBatTotal(self):
+        response = self.getProcessdata("scb:statistic:EnergyFlow", ['Statistic:EnergyHomeBat:Total'])
+        value = response[0]['value'] / 1000 # Wh -> kWh
+        return int(value)
+
+    # Voltage
     def getAcVoltage3pAvg(self):
         response1 = self.getProcessdata("devices:local:ac", ['L1_U'])
         response2 = self.getProcessdata("devices:local:ac", ['L2_U'])
         response3 = self.getProcessdata("devices:local:ac", ['L3_U'])
-
-        return (response1[0]['value'] + response2[0]['value'] + response3[0]['value'])/3
-
-
-    def getHomePowerConsumption(self):
-        response = self.getProcessdata("devices:local", ['HomeOwn_P'])
-        return response[0]['value']
-
-    def getHomeAc(self):
-        response = self.getProcessdata("devices:local:ac", ['HomeOwn_P'])
-        return response[0]['value']
+        value = (response1[0]['value'] + response2[0]['value'] + response3[0]['value'])/3
+        return int(value)
 
     ###
     # Set values
@@ -209,6 +241,3 @@ class connect:
         response = requests.get(url=url, headers=self.headers, timeout=10)
         response = json.loads(response.text)
         return response
-
-
-
