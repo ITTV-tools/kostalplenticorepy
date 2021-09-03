@@ -149,17 +149,35 @@ class connect:
 
     ###
     # Get specific value functions from processdata
+    # See this file for getProcessdata input
+    # https://github.com/ITTV-tools/homeassistant-kostalplenticore/blob/master/custom_components/kostal_plenticore/const.py
     ###
     def getBatteryPercent(self):
         response = self.getProcessdata("devices:local:battery", ['SoC'])
+        return response[0]['value']
+
+    def getBatteryCycles(self):
+        response = self.getProcessdata("devices:local:battery", ['Cycles'])
         return response[0]['value']
 
     def getPvPower(self):
         response = self.getProcessdata("devices:local", ['Dc_P'])
         return response[0]['value']
 
+    def getAcVoltage3pAvg(self):
+        response1 = self.getProcessdata("devices:local:ac", ['L1_U'])
+        response2 = self.getProcessdata("devices:local:ac", ['L2_U'])
+        response3 = self.getProcessdata("devices:local:ac", ['L3_U'])
+
+        return (response1[0]['value'] + response2[0]['value'] + response3[0]['value'])/3
+
+
     def getHomePowerConsumption(self):
         response = self.getProcessdata("devices:local", ['HomeOwn_P'])
+        return response[0]['value']
+
+    def getHomeAc(self):
+        response = self.getProcessdata("devices:local:ac", ['HomeOwn_P'])
         return response[0]['value']
 
     ###
@@ -191,3 +209,6 @@ class connect:
         response = requests.get(url=url, headers=self.headers, timeout=10)
         response = json.loads(response.text)
         return response
+
+
+
