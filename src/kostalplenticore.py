@@ -200,3 +200,9 @@ class connect:
         datareq = json.dumps(datareq)
         requests.put(url=url, data=datareq, headers=self.headers, timeout=10)
         return True
+
+    def getEvents(self):
+        url = self.BASE_URL + "/events/latest"
+        response = requests.get(url=url, headers=self.headers, timeout=10)
+        response = json.loads(response.text)
+        return response
