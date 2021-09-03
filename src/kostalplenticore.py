@@ -122,7 +122,7 @@ class connect:
         response = json.loads(response.text)
         return response
 
-        # Customized request
+    # Generic get process data request
     def getProcessdata(self, moduleid, processdata):
         url = self.BASE_URL + "/processdata"
         datareq = [{
@@ -147,42 +147,24 @@ class connect:
         response = json.loads(response.text)
         return response[0]['settings']
 
+    ###
+    # Get specific value functions from processdata
+    ###
     def getBatteryPercent(self):
-        url = self.BASE_URL + "/processdata"
-        datareq = [{
-            "moduleid": "devices:local:battery",
-            "processdataids": ['SoC']
-        }]
-        datareq = json.dumps(datareq)
-        response = requests.post(
-            url=url, data=datareq, headers=self.headers, timeout=10)
-        response = json.loads(response.text)
-        return response[0]['processdata'][0]['value']
+        response = self.getProcessdata("devices:local:battery", ['SoC'])
+        return response[0]['value']
 
     def getPvPower(self):
-        url = self.BASE_URL + "/processdata"
-        datareq = [{
-            "moduleid": "devices:local",
-            "processdataids": ['Dc_P']
-        }]
-        datareq = json.dumps(datareq)
-        response = requests.post(
-            url=url, data=datareq, headers=self.headers, timeout=10)
-        response = json.loads(response.text)
-        return response[0]['processdata'][0]['value']
+        response = self.getProcessdata("devices:local", ['Dc_P'])
+        return response[0]['value']
 
     def getHomePowerConsumption(self):
-        url = self.BASE_URL + "/processdata"
-        datareq = [{
-            "moduleid": "devices:local",
-            "processdataids": ['HomeOwn_P']
-        }]
-        datareq = json.dumps(datareq)
-        response = requests.post(
-            url=url, data=datareq, headers=self.headers, timeout=10)
-        response = json.loads(response.text)
-        return response[0]['processdata'][0]['value']
+        response = self.getProcessdata("devices:local", ['HomeOwn_P'])
+        return response[0]['value']
 
+    ###
+    # Set values
+    ###
     def setBatteryMinSoc(self, value):
         url = self.BASE_URL + "/settings"
         datareq = [{"moduleid": "devices:local", "settings": [
@@ -201,6 +183,9 @@ class connect:
         requests.put(url=url, data=datareq, headers=self.headers, timeout=10)
         return True
 
+    ###
+    # Get Events
+    ###
     def getEvents(self):
         url = self.BASE_URL + "/events/latest"
         response = requests.get(url=url, headers=self.headers, timeout=10)
