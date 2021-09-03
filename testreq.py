@@ -1,6 +1,15 @@
-import kostalplenticore
+from src.kostalplenticore import connect as kostalplenticoreconnect
+import json
 
-con = kostalplenticore.connect("192.168.251.22", "<PW>")
+# Opening JSON config file
+confFile = open('config.json',)
+
+# returns JSON object as 
+# a dictionary
+config = json.load(confFile)
+
+
+con = kostalplenticoreconnect(config['host'], config['password'])
 con.login()
 print(con.getBatteryPercent())
 print(con.getPvPower())
