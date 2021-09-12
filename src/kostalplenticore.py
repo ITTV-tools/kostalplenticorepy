@@ -179,7 +179,7 @@ class connect:
         return int(value)
 
     def getHomePowerConsumption(self):
-        response = self.getProcessdata("devices:local", ['HomeOwn_P'])
+        response = self.getProcessdata("devices:local", ['Home_P'])
         value = response[0]['value']
         return int(value)
 
