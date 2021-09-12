@@ -155,11 +155,13 @@ class connect:
     # Battery
     def getBatteryPercent(self):
         response = self.getProcessdata("devices:local:battery", ['SoC'])
-        return response[0]['value']
+        value = response[0]['value']
+        return int(value)
 
     def getBatteryCycles(self):
         response = self.getProcessdata("devices:local:battery", ['Cycles'])
-        return response[0]['value']
+        value =  response[0]['value']
+        return int(value)
 
     # Power (W)
     def getPvPower(self):
