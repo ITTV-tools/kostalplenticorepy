@@ -176,7 +176,7 @@ class connect:
         return int(value)
 
     def getBatteryPower(self):
-        response = self.getProcessdata("devices:local", ['HomeBat_P'])
+        response = self.getProcessdata("devices:local:battery", ['P'])
         value = response[0]['value']
         return int(value)
 

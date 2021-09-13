@@ -1,0 +1,205 @@
+[
+    {
+        "processdataids": [
+            "Bat2Grid_P",
+            "Dc_P",
+            "DigitalIn",
+            "EM_State",
+            "Grid2Bat_P",
+            "Grid_L1_I",
+            "Grid_L1_P",
+            "Grid_L2_I",
+            "Grid_L2_P",
+            "Grid_L3_I",
+            "Grid_L3_P",
+            "Grid_P",
+            "Grid_Q",
+            "Grid_S",
+            "HomeBat_P",
+            "HomeGrid_P",
+            "HomeOwn_P",
+            "HomePv_P",
+            "Home_P",
+            "Inverter:State",
+            "Iso_R",
+            "LimitEvuAbs",
+            "LimitEvuRel",
+            "PV2Bat_P",
+            "WorkTime"
+        ],
+        "moduleid": "devices:local"
+    },
+    {
+        "processdataids": [
+            "CosPhi",
+            "Frequency",
+            "InvIn_P",
+            "InvOut_P",
+            "L1_I",
+            "L1_P",
+            "L1_U",
+            "L2_I",
+            "L2_P",
+            "L2_U",
+            "L3_I",
+            "L3_P",
+            "L3_U",
+            "P",
+            "Q",
+            "ResidualCDc_I",
+            "S"
+        ],
+        "moduleid": "devices:local:ac"
+    },
+    {
+        "processdataids": [
+            "BatManufacturer",
+            "BatModel",
+            "BatSerialNo",
+            "BatVersionFW",
+            "Cycles",
+            "FullChargeCap_E",
+            "I",
+            "P",
+            "SoC",
+            "U",
+            "WorkCapacity"
+        ],
+        "moduleid": "devices:local:battery"
+    },
+    {
+        "processdataids": [
+            "CosPhi",
+            "Frequency",
+            "L1_I",
+            "L1_P",
+            "L1_Q",
+            "L1_S",
+            "L1_U",
+            "L2_I",
+            "L2_P",
+            "L2_Q",
+            "L2_S",
+            "L2_U",
+            "L3_I",
+            "L3_P",
+            "L3_Q",
+            "L3_S",
+            "L3_U",
+            "P",
+            "Q",
+            "S"
+        ],
+        "moduleid": "devices:local:powermeter"
+    },
+    {
+        "processdataids": [
+            "I",
+            "P",
+            "U"
+        ],
+        "moduleid": "devices:local:pv1"
+    },
+    {
+        "processdataids": [
+            "I",
+            "P",
+            "U"
+        ],
+        "moduleid": "devices:local:pv2"
+    },
+    {
+        "processdataids": [
+            "ErrMc",
+            "ErrSFH",
+            "Event:ActiveErrorCnt",
+            "Event:ActiveWarningCnt"
+        ],
+        "moduleid": "scb:event"
+    },
+    {
+        "processdataids": [
+            "PortalConActive"
+        ],
+        "moduleid": "scb:export"
+    },
+    {
+        "processdataids": [
+            "Statistic:Autarky:Day",
+            "Statistic:Autarky:Month",
+            "Statistic:Autarky:Total",
+            "Statistic:Autarky:Year",
+            "Statistic:CO2Saving:Day",
+            "Statistic:CO2Saving:Month",
+            "Statistic:CO2Saving:Total",
+            "Statistic:CO2Saving:Year",
+            "Statistic:EnergyChargeGrid:Day",
+            "Statistic:EnergyChargeGrid:Month",
+            "Statistic:EnergyChargeGrid:Total",
+            "Statistic:EnergyChargeGrid:Year",
+            "Statistic:EnergyChargeInvIn:Day",
+            "Statistic:EnergyChargeInvIn:Month",
+            "Statistic:EnergyChargeInvIn:Total",
+            "Statistic:EnergyChargeInvIn:Year",
+            "Statistic:EnergyChargePv:Day",
+            "Statistic:EnergyChargePv:Month",
+            "Statistic:EnergyChargePv:Total",
+            "Statistic:EnergyChargePv:Year",
+            "Statistic:EnergyDischarge:Day",
+            "Statistic:EnergyDischarge:Month",
+            "Statistic:EnergyDischarge:Total",
+            "Statistic:EnergyDischarge:Year",
+            "Statistic:EnergyDischargeGrid:Day",
+            "Statistic:EnergyDischargeGrid:Month",
+            "Statistic:EnergyDischargeGrid:Total",
+            "Statistic:EnergyDischargeGrid:Year",
+            "Statistic:EnergyHome:Day",
+            "Statistic:EnergyHome:Month",
+            "Statistic:EnergyHome:Total",
+            "Statistic:EnergyHome:Year",
+            "Statistic:EnergyHomeBat:Day",
+            "Statistic:EnergyHomeBat:Month",
+            "Statistic:EnergyHomeBat:Total",
+            "Statistic:EnergyHomeBat:Year",
+            "Statistic:EnergyHomeGrid:Day",
+            "Statistic:EnergyHomeGrid:Month",
+            "Statistic:EnergyHomeGrid:Total",
+            "Statistic:EnergyHomeGrid:Year",
+            "Statistic:EnergyHomeOwn:Total",
+            "Statistic:EnergyHomePv:Day",
+            "Statistic:EnergyHomePv:Month",
+            "Statistic:EnergyHomePv:Total",
+            "Statistic:EnergyHomePv:Year",
+            "Statistic:EnergyPv1:Day",
+            "Statistic:EnergyPv1:Month",
+            "Statistic:EnergyPv1:Total",
+            "Statistic:EnergyPv1:Year",
+            "Statistic:EnergyPv2:Day",
+            "Statistic:EnergyPv2:Month",
+            "Statistic:EnergyPv2:Total",
+            "Statistic:EnergyPv2:Year",
+            "Statistic:EnergyPv3:Day",
+            "Statistic:EnergyPv3:Month",
+            "Statistic:EnergyPv3:Total",
+            "Statistic:EnergyPv3:Year",
+            "Statistic:OwnConsumptionRate:Day",
+            "Statistic:OwnConsumptionRate:Month",
+            "Statistic:OwnConsumptionRate:Total",
+            "Statistic:OwnConsumptionRate:Year",
+            "Statistic:Yield:Day",
+            "Statistic:Yield:Month",
+            "Statistic:Yield:Total",
+            "Statistic:Yield:Year"
+        ],
+        "moduleid": "scb:statistic:EnergyFlow"
+    },
+    {
+        "processdataids": [
+            "Update:Progress",
+            "Update:Status",
+            "Update:StatusTime",
+            "Update:Version"
+        ],
+        "moduleid": "scb:update"
+    }
+]
