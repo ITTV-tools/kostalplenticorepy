@@ -11,6 +11,11 @@ import os
 import hmac
 from Crypto.Cipher import AES
 import binascii
+from enum import Enum
+
+class EnergyUnit(Enum):
+    kWh = 1
+    Wh = 2
 
 
 def randomString(stringLength):
@@ -185,26 +190,37 @@ class connect:
         value = response[0]['value']
         return int(value)
 
-    # Energy (kWh)
-    def getHomeConsumptionTotal(self):
+    # Energy (Wh / kWh)
+
+    def convertEnergyUnit(self, valueWh ,energyUnit:EnergyUnit):
+        # if energyUnit is in kWh convert from wH
+        if energyUnit == EnergyUnit.kWh:
+            returnValue = valueWh / 1000 # Wh -> kWh
+        else:
+            returnValue = valueWh
+
+        return int(returnValue)
+
+    def getHomeConsumptionTotal(self, energyUnit:EnergyUnit=EnergyUnit.kWh):
         response = self.getProcessdata("scb:statistic:EnergyFlow", ['Statistic:EnergyHome:Total'])
-        value = response[0]['value'] / 1000 # Wh -> kWh
-        return int(value)
+        # if energyUnit is in kWh convert from wH
+        return self.convertEnergyUnit(response[0]['value'], energyUnit)
 
-    def getHomeConsumptionFromGridTotal(self):
+    def getHomeConsumptionFromGridTotal(self, energyUnit:EnergyUnit=EnergyUnit.kWh):
         response = self.getProcessdata("scb:statistic:EnergyFlow", ['Statistic:EnergyHomeGrid:Total'])
-        value = response[0]['value'] / 1000 # Wh -> kWh
-        return int(value)
+        # if energyUnit is in kWh convert from wH
+        return self.convertEnergyUnit(response[0]['value'], energyUnit)
 
-    def getHomeConsumptionFromPVTotal(self):
+    def getHomeConsumptionFromPVTotal(self, energyUnit:EnergyUnit=EnergyUnit.kWh):
         response = self.getProcessdata("scb:statistic:EnergyFlow", ['Statistic:EnergyHomePv:Total'])
-        value = response[0]['value'] / 1000 # Wh -> kWh
-        return int(value)
+        # if energyUnit is in kWh convert from wH
+        return self.convertEnergyUnit(response[0]['value'], energyUnit)
 
-    def getHomeConsumptionFromBatTotal(self):
+    def getHomeConsumptionFromBatTotal(self, energyUnit:EnergyUnit=EnergyUnit.kWh):
         response = self.getProcessdata("scb:statistic:EnergyFlow", ['Statistic:EnergyHomeBat:Total'])
-        value = response[0]['value'] / 1000 # Wh -> kWh
-        return int(value)
+        # if energyUnit is in kWh convert from wH
+        return self.convertEnergyUnit(response[0]['value'], energyUnit)
+
 
     # Voltage
     def getAcVoltage3pAvg(self):

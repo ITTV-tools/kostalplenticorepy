@@ -1,4 +1,4 @@
-from src.kostalplenticore import connect as kostalplenticoreconnect
+from src.kostalplenticore import EnergyUnit, connect as kostalplenticoreconnect
 import json
 from tabulate import tabulate
 
@@ -27,7 +27,7 @@ table = [
         ["Home energy usage",con.getHomeConsumptionTotal(),"kWh"],
         ["Home energy usage from grid",con.getHomeConsumptionFromGridTotal(),"kWh"],
         ["Home energy usage from PV",con.getHomeConsumptionFromPVTotal(),"kWh"],
-        ["Home energy usage from battery",con.getHomeConsumptionFromBatTotal(),"kWh"],
+        ["Home energy usage from battery",con.getHomeConsumptionFromBatTotal(EnergyUnit.Wh),"Wh"],
         # Voltage
         ["Voltage 3P average",con.getAcVoltage3pAvg(),"V"]
         ]
