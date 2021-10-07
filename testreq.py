@@ -1,8 +1,35 @@
-import kostalplenticore
+from src.kostalplenticore import EnergyUnit, connect as kostalplenticoreconnect
+import json
+from tabulate import tabulate
 
-con = kostalplenticore.connect("192.168.251.22", "<PW>")
+# Opening JSON config file
+confFile = open('config.json',)
+
+# returns JSON object as
+# a dictionary
+config = json.load(confFile)
+
+# Connect
+con = kostalplenticoreconnect(config['host'], config['password'])
 con.login()
-print(con.getBatteryPercent())
-print(con.getPvPower())
-print(con.getHomePowerConsumption())
-print(con.getProcessdata("devices:local", ["HomeGrid_P"])[0]["value"])
+
+# Create table
+table = [
+        # Battery
+        ["Battery SoC",con.getBatteryPercent(),"%"],
+        ["Battery cycles",con.getBatteryCycles(),""],
+        # Power
+        ["Home Power",con.getHomePowerConsumption(),"W"],
+        ["PV Power",con.getPvPower(),"W"],
+        ["Grid Power",con.getGridPower(),"W"],
+        ["Battery Power",con.getBatteryPower(),"W"],
+        # Energy
+        ["Home energy usage",con.getHomeConsumptionTotal(),"kWh"],
+        ["Home energy usage from grid",con.getHomeConsumptionFromGridTotal(),"kWh"],
+        ["Home energy usage from PV",con.getHomeConsumptionFromPVTotal(),"kWh"],
+        ["Home energy usage from battery",con.getHomeConsumptionFromBatTotal(EnergyUnit.Wh),"Wh"],
+        # Voltage
+        ["Voltage 3P average",con.getAcVoltage3pAvg(),"V"]
+        ]
+
+print(tabulate(table))
